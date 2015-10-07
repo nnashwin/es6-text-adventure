@@ -35,10 +35,23 @@
 }
 
 /* background-color */
-.bgc-purple {
-  background-color: purple;
+.bgc-191919 {
+  background-color: #191919;
 }
 
 .bgc-red {
   background-color: red;
 }
+
+/* color */
+
+.c-55C055 {
+  color: #55C055;
+}
+
+/* overflow */
+
+.ovy-s {
+  overflow-y: scroll;
+}
+
