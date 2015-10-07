@@ -4,7 +4,10 @@
   "description": "",
   "main": "first.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "nodemon --exec 'rm -rf ./output/*'",
+    "compile": "nodemon --ignore output/ --exec 'npm run script'",
+    "script": "rm -rf output/* && babel --stage 0 src/*.js >> output/build.js"
   },
   "author": "",
   "standard": {

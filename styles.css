@@ -1,0 +1,44 @@
+/* width */
+
+.w-per100 {
+  width: 100%;
+}
+
+.w-600 {
+  width: 600px;
+}
+
+/* height */
+
+.h-600 {
+  height: 600px;
+}
+
+.h-per80 {
+  height: 80%;
+}
+
+.h-per20 {
+  height: 20%;
+}
+
+/* text-align */
+
+.ta-c {
+  text-align: center;
+}
+
+/* margin */
+
+.m0_auto {
+  margin: 0 auto;
+}
+
+/* background-color */
+.bgc-purple {
+  background-color: purple;
+}
+
+.bgc-red {
+  background-color: red;
+}
