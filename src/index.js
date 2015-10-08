@@ -10,7 +10,7 @@ var AdventureGameObject = AdventureGameObject || {}
     locationMatrix[roomKey] = room
   }
 
-  function startGame () {
+  Game.startGame = function () {
     let startingLocation = locationMatrix['dr_lights_lab']
     Game.currentLocation = startingLocation
     return {
@@ -44,9 +44,5 @@ var AdventureGameObject = AdventureGameObject || {}
     Game.currentLocation = currentLocation
     console.log('new currentLocation after Move: ' + currentLocation.currentRoomName)
   }
-  
-  let currentLocation = startGame()
-  startGame()
-  Game.currentLocation = currentLocation
-  takePath('the_fields')
+
 })()
