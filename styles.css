@@ -1,3 +1,28 @@
+body {
+    background-color: #191919;
+    color: #55C055;
+    font-size: 16px;
+    text-shadow: 0 0 12px #c0c0c0;
+    cursor: default;
+}
+
+::selection {
+  background: #52FC68; 
+  color: black;
+  box-shadow: 0px 0px 12px #80a080;
+  text-shadow: 0 0 12px white;
+}
+
+/* font size */
+.fz-16 {
+  font-size: 16px;
+}
+
+/* text shadow */
+.tsh-0_0_12_c0 {
+  text-shadow: 0 0 12px #c0c0c0;
+}
+
 /* width */
 
 .w-per100 {
@@ -14,12 +39,26 @@
   height: 600px;
 }
 
-.h-per80 {
-  height: 80%;
+.h-per100 {
+  height: 100%;
 }
 
-.h-per20 {
-  height: 20%;
+.h-per97 {
+  height: 97%;
+}
+
+.h-per3 {
+  height: 3%;
+}
+
+/* padding */
+.pb-5 {
+  padding-bottom: 5px;
+}
+
+/* box-shadow */
+.bxsh-screen {
+  box-shadow: inset 0 0 160px #263b02;
 }
 
 /* text-align */
@@ -35,8 +74,8 @@
 }
 
 /* background-color */
-.bgc-191919 {
-  background-color: #191919;
+.bgc-1b2a04 {
+  background-color: #1b2a04;
 }
 
 .bgc-red {
@@ -48,6 +87,8 @@
 .c-55C055 {
   color: #55C055;
 }
+
+
 
 /* overflow */
 
