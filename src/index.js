@@ -40,9 +40,8 @@ var AdventureGameObject = AdventureGameObject || {}
       currentRoomDesc: newLocation.desc,
       currentDirections: newLocation.directions
     }
-    currentLocation = newLoc
-    Game.currentLocation = currentLocation
-    console.log('new currentLocation after Move: ' + currentLocation.currentRoomName)
+    Game.currentLocation = newLoc
+    console.log('new currentLocation after Move: ' + Game.currentLocation)
   }
 
 })()

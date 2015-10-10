@@ -23,6 +23,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
     let userInputDiv = document.createElement('div')
     let newUserText = document.createTextNode(userInput)
     document.getElementById('text').appendChild(userInputDiv)
+    Screen.parseText(userInput)
     userInputDiv.appendChild(newUserText)
   }
 
@@ -40,5 +41,11 @@ let AdventureScreenObject = AdventureScreenObject || {}
     document.getElementById('text').appendChild(newBreak)
     newTitleDiv.appendChild(newTitleText)
     newDescDiv.appendChild(newDescText)
+  }
+
+  Screen.parseText = function (inputText) {
+    let userText = inputText.toLowerCase()
+    let userTextArray = userText.split(' ')
+    console.log(userTextArray)
   }
 })()
