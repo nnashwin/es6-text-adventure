@@ -3,16 +3,17 @@ let AdventureGameObject = AdventureGameObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   var commands = {
-    'go': 'movement',
-    'move': 'movement',
-    'walk': 'movement',
-    'take': 'action',
-    'grab': 'action',
-    'pick': 'action',
+    'go': 'changeLocation',
+    'move': 'changeLocation',
+    'walk': 'changeLocation',
+    'take': 'obtain',
+    'grab': 'obtain',
+    'pick': 'obtain',
     'choose': 'action',
     'select': 'action',
-    'wear': 'action',
-    'don': 'action'
+    'wear': 'equip',
+    'don': 'equip',
+    'put on': 'equip'
   }
 
   Game.commands = commands
