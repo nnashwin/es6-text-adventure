@@ -3,8 +3,6 @@ let AdventureScreenObject = AdventureScreenObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
-  console.log('Game in Screen-UserInput file')
-  console.log(Game)
   Screen.userTextToScreen = function () {
     let userInputField = document.getElementById('text-input')
     userInputField.onkeypress = function (e) {
