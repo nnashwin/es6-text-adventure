@@ -2,8 +2,6 @@ var AdventureGameObject = AdventureGameObject || {}
 
 ;(function (undefined) {
   var Game = AdventureGameObject
-  console.log(Game)
-  console.log('game rooms' + Game.tyler)
   var rooms = [
     {
       key: 'intro',
@@ -13,7 +11,7 @@ var AdventureGameObject = AdventureGameObject || {}
     },
     {
       key: 'dr_lights_lab',
-      name: "laboratory",
+      name: 'laboratory',
       desc: 'a damp and dark ruin, full of dust and sand.  Shattered remains of rusted terminals and an old office chair lies sits in the back corner of the office.  A queer smell of gasoline and building materials pervades the entire building. in the corner of the office a note lies on the metallic ruins of what appears to be a table.',
       tableTop: 'on the tabletop lies insulation and rocks from the ceiling.  as you look at the table a note can be seen sticking out from underneath a pile of rocks.',
       computer: "the room begins to shake as you reenter Dr. Light's lab. A panel on the wall to your left slides open and you see an opening big enough for you to fit through.",

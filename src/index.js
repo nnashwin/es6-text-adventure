@@ -13,35 +13,22 @@ var AdventureGameObject = AdventureGameObject || {}
   Game.startGame = function () {
     let startingLocation = locationMatrix['dr_lights_lab']
     Game.currentLocation = startingLocation
-    return {
-      currentRoomKey: startingLocation.key,
-      currentRoomName: startingLocation.name,
-      currentRoomDesc: startingLocation.desc,
-      currentDirections: startingLocation.directions
-    }
   }
 
-  function takePath (locationKey) {
+  Game.takePath = function (locationKey) {
     console.log(locationMatrix)
     if (locationKey === Game.currentLocation.currentRoomKey) {
       console.log('you are currently in this location')
     }
-    if (currentLocation.currentDirections.indexOf(locationKey) !== -1) {
-      return moveLocation(locationMatrix[locationKey])
+    if (Game.currentLocation.currentDirections.indexOf(locationKey) !== -1) {
+      return Game.moveLocation(locationMatrix[locationKey])
     } else {
       return console.log('that is not a path to go to.')
     }
   }
 
-  function moveLocation (newLocation) {
-    let newLoc = {
-      currentRoomKey: newLocation.key,
-      currentRoomName: newLocation.name,
-      currentRoomDesc: newLocation.desc,
-      currentDirections: newLocation.directions
-    }
-    Game.currentLocation = newLoc
+  Game.moveLocation = function (newLocation) {
+    Game.currentLocation = newLocation
     console.log('new currentLocation after Move: ' + Game.currentLocation)
   }
-
 })()

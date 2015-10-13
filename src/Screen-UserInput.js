@@ -3,7 +3,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
-  console.log('functions-script: Game')
+  console.log('Game in Screen-UserInput file')
   console.log(Game)
   Screen.userTextToScreen = function () {
     let userInputField = document.getElementById('text-input')
@@ -23,17 +23,16 @@ let AdventureScreenObject = AdventureScreenObject || {}
     let userInputDiv = document.createElement('div')
     let newUserText = document.createTextNode(userInput)
     document.getElementById('text').appendChild(userInputDiv)
-    Screen.parseText(userInput)
+    Game.parseText(userInput)
     userInputDiv.appendChild(newUserText)
   }
 
   Screen.addAreaText = function (location) {
-    console.log(location)
     let newTitleDiv = document.createElement('div')
     newTitleDiv.classList.add('ta-c', 'pb-5')
-    let newTitleText = document.createTextNode(location.currentRoomName)
+    let newTitleText = document.createTextNode(Game.currentLocation.name)
     let newDescDiv = document.createElement('div')
-    let newDescText = document.createTextNode(location.currentRoomDesc)
+    let newDescText = document.createTextNode(Game.currentLocation.desc)
     let newBreak = document.createElement('br')
     document.getElementById('text').appendChild(newTitleDiv)
     document.getElementById('text').appendChild(newBreak)
@@ -41,11 +40,5 @@ let AdventureScreenObject = AdventureScreenObject || {}
     document.getElementById('text').appendChild(newBreak)
     newTitleDiv.appendChild(newTitleText)
     newDescDiv.appendChild(newDescText)
-  }
-
-  Screen.parseText = function (inputText) {
-    let userText = inputText.toLowerCase()
-    let userTextArray = userText.split(' ')
-    console.log(userTextArray)
   }
 })()
