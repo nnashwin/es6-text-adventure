@@ -26,14 +26,14 @@ let AdventureScreenObject = AdventureScreenObject || {}
     userInputDiv.appendChild(newUserText)
   }
 
-  Screen.displayError = function (errorMessage) {
-    let errorDiv = document.createElement('div')
-    let errorText = document.createTextNode(errorMessage)
+  Screen.displayConsoleMessage = function (message) {
+    let consoleDiv = document.createElement('div')
+    let consoleText = document.createTextNode(message)
     let newBreak = document.createElement('br')
-    errorDiv.classList.add('pb-5')
-    document.getElementById('text').appendChild(errorDiv)
+    consoleDiv.classList.add('pb-5')
+    document.getElementById('text').appendChild(consoleDiv)
     document.getElementById('text').appendChild(newBreak)
-    errorDiv.appendChild(errorText)
+    consoleDiv.appendChild(consoleText)
   }
 
   Screen.addAreaText = function (locationName) {

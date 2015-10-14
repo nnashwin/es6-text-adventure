@@ -32,4 +32,6 @@ let AdventureGameObject = AdventureGameObject || {}
     Game.currentLocation = newLocation
     Screen.addAreaText(Game.currentLocation)
   }
+
+
 })()

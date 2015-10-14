@@ -6,6 +6,12 @@ let AdventureScreenObject = AdventureScreenObject || {}
   function findCommand (inputArray) {
     for (var i = 0, n = inputArray.length; i < n; i++) {
       let index = inputArray[i]
+      let result
+      if (index === 'current') {
+        result = 'Your current location is: ' + Game.currentLocation.name
+        return result
+      }
+
       if (Game.commands[index] && Game.commands[index] === 'changeLocation') {
         for (let j = i + 1, n = inputArray.length; j < n; j++) {
           let locationName = inputArray[j]
@@ -16,24 +22,34 @@ let AdventureScreenObject = AdventureScreenObject || {}
           if (Game.currentLocation.directions.indexOf(locationName) !== -1) {
             return Game.takePath(locationName)
           }
-          return {
-            error: "location doesn't exist"
-          }
         }
-      } else if (Game.commands[index] && Game.commands[index] === 'takeItem') {
+        return {
+          message: "location doesn't exist"
+        }
+      } else if (Game.commands[index] && Game.commands[index] === 'obtain') {
         console.log('grab that item')
-        for (let j = i + 1, n = inputArray.length; j < n; j++) {
-          let itemIndex = inputArray[j]
-          console.log(itemIndex)
-          if (Game.currentLocation.items) {
-            return console.log('item found')
-          } else {
-            return console.log('item not found')
-          }
+        result = findItem(inputArray, i)
+        return result
+      } else {
+        return {
+          message: 'your input was not recognized'
+        }
+      }
+    }
+  }
+
+  function findItem (inputArray, i) {
+    for (let j = i + 1, n = inputArray.length; j < n; j++) {
+      let itemIndex = inputArray[j]
+      console.log(itemIndex)
+      if (Game.currentLocation.items.indexOf(itemIndex) !== -1) {
+        console.log(Game.currentLocation.items.indexOf(itemIndex))
+        return {
+          item: itemIndex
         }
       } else {
         return {
-          error: 'your input was not recognized'
+          message: 'item was not found'
         }
       }
     }
@@ -42,6 +58,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
     let textInput = playerInput.toLowerCase()
     let inputArray = textInput.split(' ')
     let result = findCommand(inputArray)
-    if (result.error) Screen.displayError(result.error)
+    console.log(result)
+    Screen.displayConsoleMessage(result.message)
   }
 })()

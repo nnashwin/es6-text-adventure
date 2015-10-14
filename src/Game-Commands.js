@@ -13,7 +13,11 @@ let AdventureGameObject = AdventureGameObject || {}
     'select': 'action',
     'wear': 'equip',
     'don': 'equip',
-    'put on': 'equip'
+    'put on': 'equip',
+    'look': 'examine',
+    'examine': 'examine',
+    'inspect': 'examine',
+    'watch': 'examine'
   }
 
   Game.commands = commands
