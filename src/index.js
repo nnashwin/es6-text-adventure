@@ -1,9 +1,10 @@
-
-var AdventureGameObject = AdventureGameObject || {}
+let AdventureScreenObject = AdventureScreenObject || {}
+let AdventureGameObject = AdventureGameObject || {}
 
 ;(function (undefined) {
-  var Game = AdventureGameObject
-  var locationMatrix = {}
+  let Game = AdventureGameObject
+  let Screen = AdventureScreenObject
+  let locationMatrix = {}
   for (var i = 0, n = Game.rooms.length; i < n; i++) {
     let room = Game.rooms[i]
     let roomName = Game.rooms[i].name
@@ -29,7 +30,6 @@ var AdventureGameObject = AdventureGameObject || {}
 
   Game.moveLocation = function (newLocation) {
     Game.currentLocation = newLocation
-    console.log('new currentLocation after Move: ' + Game.currentLocation)
-    console.log(Game.currentLocation)
+    Screen.addAreaText(Game.currentLocation)
   }
 })()
