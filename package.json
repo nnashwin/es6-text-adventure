@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "nodemon --exec 'rm -rf ./output/*'",
     "compile": "nodemon --ignore output/ --exec 'npm run script'",
-    "script": "rm -rf output/* && babel --stage 0 src/*.js >> output/build.js"
+    "script": "rm -rf output/* && babel --stage 0 src/* >> output/build.js"
   },
   "author": "",
   "standard": {

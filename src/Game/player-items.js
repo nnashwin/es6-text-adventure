@@ -11,4 +11,12 @@ let AdventureGameObject = AdventureGameObject || {}
       Screen.displayConsoleMessage(item.name)
     })
   }
+
+  Player.addItem = function (itemName) {
+    console.log('before')
+    console.log(Player.inventory)
+    Player.inventory.push(itemName)
+    console.log('after')
+    console.log(Player.inventory)
+  }
 })()

@@ -1,27 +1,18 @@
 let AdventureGameObject = AdventureGameObject || {}
 let AdventureScreenObject = AdventureScreenObject || {}
-let PlayerObject = PlayerObject || {}
+let AdventurePlayerObject = AdventurePlayerObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
-  let Player = PlayerObject
+  let Player = AdventurePlayerObject
+  console.log(Player)
   function findCommand (inputArray) {
     for (var i = 0, n = inputArray.length; i < n; i++) {
+      console.log(Game.currentLocation)
       let index = inputArray[i]
       let result
-      if (index === 'current') {
-        result = 'Your current location is: ' + Game.currentLocation.name
-        return result
-      }
 
-      if (index === 'check') {
-        for (let j = i + 1, n = inputArray.length; j < n; j++) {
-          let checkedObject = inputArray[j]
-          if (checkedObject === 'inventory') {
-            return Player.listInventory()
-          }
-        }
-      }
+      findBaseAction(index, result)
 
       if (Game.commands[index] && Game.commands[index] === 'changeLocation') {
         for (let j = i + 1, n = inputArray.length; j < n; j++) {
@@ -34,29 +25,18 @@ let PlayerObject = PlayerObject || {}
             return Game.takePath(locationName)
           }
         }
-        return {
-          message: "location doesn't exist"
-        }
-      } else if (Game.commands[index] && Game.commands[index] === 'obtain') {
+        result = "location doesn't exist"
+        return result
+      }
+
+      if (Game.commands[index] && Game.commands[index] === 'obtain') {
         console.log('grab that item')
         result = findItem(inputArray, i)
-        return result
-      } else {
-        return {
-          message: 'your input was not recognized'
-        }
-      }
-    }
-  }
-
-  function findItem (inputArray, i) {
-    for (let j = i + 1, n = inputArray.length; j < n; j++) {
-      let itemIndex = inputArray[j]
-      console.log(itemIndex)
-      if (Game.currentLocation.items.indexOf(itemIndex) !== -1) {
-        console.log(Game.currentLocation.items.indexOf(itemIndex))
-        return {
-          item: itemIndex
+        console.log(result)
+        if (result.item) {
+          return Player.addItem(result.item)
+        } else {
+          return result
         }
       } else {
         return {
@@ -65,11 +45,48 @@ let PlayerObject = PlayerObject || {}
       }
     }
   }
+
+  function findItem (inputArray, i) {
+    let error
+    for (let j = i + 1, n = inputArray.length; j < n; j++) {
+      let itemIndex = inputArray[j]
+      console.log(arrayObjectIndexOf(Game.currentLocation.items, itemIndex, 'name'))
+      if (arrayObjectIndexOf(Game.currentLocation.items, itemIndex, 'name') !== -1) {
+        console.log('itemIndex: ' + itemIndex)
+        return {
+          item: itemIndex
+        }
+      }
+    }
+    error = 'item was not found'
+    return error
+  }
+
+  function findBaseAction (index, result) {
+    if (index === 'current') {
+      result = 'Your current location is: ' + Game.currentLocation.name
+      console.log(result)
+      return result
+    }
+
+    if (index === 'inventory') {
+      console.log('checking inventory')
+      return Player.listInventory()
+    }
+  }
+
+  function arrayObjectIndexOf (myArray, searchTerm, property) {
+    for (let i = 0, n = myArray.length; i < n; i++) {
+      if (myArray[i][property] === searchTerm) return i
+    }
+    return -1
+  }
+
   Game.parseText = function (playerInput) {
     let textInput = playerInput.toLowerCase()
     let inputArray = textInput.split(' ')
     let result = findCommand(inputArray)
     console.log(result)
-    Screen.displayConsoleMessage(result.message)
+    Screen.displayConsoleMessage(result)
   }
 })()
