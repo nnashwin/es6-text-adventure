@@ -3,14 +3,24 @@ let AdventureScreenObject = AdventureScreenObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
+  Screen.previousCommands = []
+  let previousCommandCounter = Screen.previousCommands.length
   Screen.userTextToScreen = function () {
     let userInputField = document.getElementById('text-input')
-    userInputField.onkeypress = function (e) {
+    userInputField.onkeydown = function (e) {
       let userInput
       let event = e || window.event
       let keyCode = event.keyCode || event.which
+      if (keyCode === 38) {
+        let value = Screen.previousCommands[previousCommandCounter - 1]
+        userInputField.value = value
+        previousCommandCounter++
+      }
       if (keyCode === 13) {
         userInput = userInputField.value
+        Screen.previousCommands.push(userInput)
+        previousCommandCounter = Screen.previousCommands.length
+        console.log(Screen.previousCommands)
         userInputField.value = ''
         return Screen.addUserText(userInput)
       }
@@ -20,10 +30,13 @@ let AdventureScreenObject = AdventureScreenObject || {}
   Screen.addUserText = function (userInput) {
     let userInputDiv = document.createElement('div')
     let newUserText = document.createTextNode('> ' + userInput)
+    let textHolder = document.getElementById('text-holder')
+    let text = document.getElementById('text')
     userInputDiv.classList.add('pb-5')
     document.getElementById('text').appendChild(userInputDiv)
     Game.parseText(userInput)
     userInputDiv.appendChild(newUserText)
+    textHolder.scrollTop = text.clientHeight
   }
 
   Screen.displayConsoleMessage = function (message) {

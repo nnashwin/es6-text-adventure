@@ -5,7 +5,6 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
   let Player = AdventurePlayerObject
-  console.log(Player)
   function findCommand (inputArray) {
     for (var i = 0, n = inputArray.length; i < n; i++) {
       console.log(Game.currentLocation)
@@ -40,6 +39,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
         }
       }
     }
+   return 'that command is not recognized'
   }
 
   function findItem (inputArray, i) {
