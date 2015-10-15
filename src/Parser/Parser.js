@@ -1,8 +1,10 @@
 let AdventureGameObject = AdventureGameObject || {}
 let AdventureScreenObject = AdventureScreenObject || {}
+let PlayerObject = PlayerObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   let Screen = AdventureScreenObject
+  let Player = PlayerObject
   function findCommand (inputArray) {
     for (var i = 0, n = inputArray.length; i < n; i++) {
       let index = inputArray[i]
@@ -10,6 +12,15 @@ let AdventureScreenObject = AdventureScreenObject || {}
       if (index === 'current') {
         result = 'Your current location is: ' + Game.currentLocation.name
         return result
+      }
+
+      if (index === 'check') {
+        for (let j = i + 1, n = inputArray.length; j < n; j++) {
+          let checkedObject = inputArray[j]
+          if (checkedObject === 'inventory') {
+            return Player.listInventory()
+          }
+        }
       }
 
       if (Game.commands[index] && Game.commands[index] === 'changeLocation') {

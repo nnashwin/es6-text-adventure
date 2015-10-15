@@ -2,6 +2,7 @@ var AdventureGameObject = AdventureGameObject || {}
 
 ;(function (undefined) {
   var Game = AdventureGameObject
+  console.log(Game.Item)
   var rooms = [
     {
       name: 'introduction',
@@ -14,8 +15,8 @@ var AdventureGameObject = AdventureGameObject || {}
       table: 'on the tabletop lies insulation and rocks from the ceiling.  as you look at the table a note can be seen sticking out from underneath a pile of rocks.',
       note: 'the City needs you Now...',
       furniture: [
-        new Game.Furniture('name', 'desc', 'actions that can be used')
-      ]
+        new Game.Furniture('table', 'desc', ['examine'])
+      ],
       items: [
         new Game.Item('note', 'note description', ['locations']),
         new Game.Item('helmet', 'helmet desc', ['locations']),
@@ -63,7 +64,7 @@ var AdventureGameObject = AdventureGameObject || {}
       desc: '',
       items: [],
       directions: []
-    },
+    }
   ]
 
   Game.rooms = rooms
