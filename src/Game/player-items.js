@@ -1,22 +1,28 @@
 let AdventurePlayerObject = AdventurePlayerObject || {}
 let AdventureScreenObject = AdventureScreenObject || {}
-let AdventureGameObject = AdventureGameObject || {}
 ;(function (undefined) {
   let Player = AdventurePlayerObject
   let Screen = AdventureScreenObject
-  let Game = AdventureGameObject
   Player.inventory = []
-  Player.listInventory = function () {
-    Player.items.forEach((item) => {
-      Screen.displayConsoleMessage(item.name)
+  Player.listInventory = function (output) {
+    if (Player.inventory.length === 0) {
+      return Screen.displayConsoleMessage('there are no items in your inventory')
+    }
+    Screen.displayConsoleMessage('Items currently in inventory:')
+    Player.inventory.forEach((item) => {
+      Screen.displayConsoleMessage(item)
     })
   }
 
   Player.addItem = function (itemName) {
+    if (Player.inventory.indexOf(itemName) !== -1) {
+      return 'You already have ' + itemName + ' in your inventory'
+    }
     console.log('before')
     console.log(Player.inventory)
     Player.inventory.push(itemName)
     console.log('after')
     console.log(Player.inventory)
+    return itemName + ' has been added to your inventory.'
   }
 })()

@@ -38,10 +38,6 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
         } else {
           return result
         }
-      } else {
-        return {
-          message: 'item was not found'
-        }
       }
     }
   }
@@ -86,7 +82,9 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
     let textInput = playerInput.toLowerCase()
     let inputArray = textInput.split(' ')
     let result = findCommand(inputArray)
-    console.log(result)
-    Screen.displayConsoleMessage(result)
+    console.log(typeof result)
+    if (typeof result !== 'undefined') {
+      Screen.displayConsoleMessage(result)
+    }
   }
 })()
