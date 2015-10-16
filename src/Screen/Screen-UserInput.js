@@ -12,9 +12,21 @@ let AdventureScreenObject = AdventureScreenObject || {}
       let event = e || window.event
       let keyCode = event.keyCode || event.which
       if (keyCode === 38) {
-        let value = Screen.previousCommands[previousCommandCounter - 1]
-        userInputField.value = value
-        previousCommandCounter++
+        if (previousCommandCounter !== 0) {
+          let value = Screen.previousCommands[previousCommandCounter - 1]
+          userInputField.value = value
+          console.log(previousCommandCounter)
+          previousCommandCounter--
+        }
+      }
+
+      if (keyCode === 40) {
+        if (previousCommandCounter !== Screen.previousCommands.length - 1) {
+          let value = Screen.previousCommands[previousCommandCounter + 1]
+          userInputField.value = value
+          console.log(previousCommandCounter)
+          previousCommandCounter++
+        }
       }
       if (keyCode === 13) {
         userInput = userInputField.value
