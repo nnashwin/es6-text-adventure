@@ -11,7 +11,9 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       let index = inputArray[i]
       let result
 
-      findBaseAction(index, result)
+      if (index === 'current' || index === 'inventory') {
+        return findBaseAction(index, result)
+      }
 
       if (Game.commands[index] && Game.commands[index] === 'changeLocation') {
         for (let j = i + 1, n = inputArray.length; j < n; j++) {
@@ -39,7 +41,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
         }
       }
     }
-   return 'that command is not recognized'
+    return 'that command is not recognized'
   }
 
   function findItem (inputArray, i) {
@@ -62,7 +64,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
     if (index === 'current') {
       result = 'Your current location is: ' + Game.currentLocation.name
       console.log(result)
-      return result
+      return Screen.displayConsoleMessage(result)
     }
 
     if (index === 'inventory') {

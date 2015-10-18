@@ -4,6 +4,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
   let Player = AdventurePlayerObject
   let Screen = AdventureScreenObject
   Player.inventory = []
+  Player.itemsEquipped = []
   Player.listInventory = function (output) {
     if (Player.inventory.length === 0) {
       return Screen.displayConsoleMessage('there are no items in your inventory')
@@ -24,5 +25,17 @@ let AdventureScreenObject = AdventureScreenObject || {}
     console.log('after')
     console.log(Player.inventory)
     return itemName + ' has been added to your inventory.'
+  }
+
+  Player.equipItem = function (itemName) {
+    if (Player.inventory.indexOf(itemName) !== -1) {
+      console.log('has item')
+    }
+  }
+
+  Player.useItem = function (itemName) {
+    if (Player.inventory.indexOf(itemName) !== -1) {
+     console.log('has item')
+    }
   }
 })()

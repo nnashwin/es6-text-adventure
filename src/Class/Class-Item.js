@@ -2,10 +2,16 @@ let AdventureGameObject = AdventureGameObject || {}
 ;(function (undefined) {
   let Game = AdventureGameObject
   class Item {
-    constructor (name, desc, loc) {
+    constructor (name, desc, actionsThatCanBeUsed) {
       this.name = name
       this.desc = desc
-      this.loc = loc
+      let actions = actionsThatCanBeUsed
+      let actionObject = {}
+      for (let action of actions) {
+        if (this.actions.indexOf(action)) {
+          actionObject[action + 'able']
+        }
+      }
     }
   }
   Game.Item = Item
