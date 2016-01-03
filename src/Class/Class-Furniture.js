@@ -7,10 +7,6 @@ let AdventureGameObject = AdventureGameObject || {}
       this.desc = desc
       this.commands = commands
     }
-
-   //  commands.forEach((command) => {
-   //    console.log(commands)
-   //  })
   }
   Game.Furniture = Furniture
 })()

@@ -2,7 +2,6 @@ var AdventureGameObject = AdventureGameObject || {}
 
 ;(function (undefined) {
   var Game = AdventureGameObject
-  console.log(Game.Item)
   var rooms = [
     {
       name: 'introduction',
@@ -18,9 +17,9 @@ var AdventureGameObject = AdventureGameObject || {}
         new Game.Furniture('table', 'desc', ['examine'])
       ],
       items: [
-        new Game.Item('note', 'note description', ['locations']),
-        new Game.Item('helmet', 'helmet desc', ['locations']),
-        new Game.Item('capsule', 'capsule desc', ['locations'])
+          new Game.Item('note', 'note description', ['location', 'examine'], {'examine': ''}),
+          new Game.Item('helmet', 'helmet desc', ['location', 'examine', 'obtain'], {'examine': 'this happens when the helmet is examined', 'obtain': 'this happens when the helmet is obtained', 'equip': 'this happens when the item is equipped'}),
+          new Game.Item('capsule', 'capsule desc', ['location', 'examine', 'obtain'])
       ],
       directions: ['fields'],
       lockedDirections: [{

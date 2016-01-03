@@ -15,7 +15,6 @@ let AdventureScreenObject = AdventureScreenObject || {}
         if (previousCommandCounter !== 0) {
           let value = Screen.previousCommands[previousCommandCounter - 1]
           userInputField.value = value
-          console.log(previousCommandCounter)
           previousCommandCounter--
         }
       }
@@ -24,7 +23,6 @@ let AdventureScreenObject = AdventureScreenObject || {}
         if (previousCommandCounter !== Screen.previousCommands.length - 1) {
           let value = Screen.previousCommands[previousCommandCounter + 1]
           userInputField.value = value
-          console.log(previousCommandCounter)
           previousCommandCounter++
         }
       }
@@ -32,7 +30,6 @@ let AdventureScreenObject = AdventureScreenObject || {}
         userInput = userInputField.value
         Screen.previousCommands.push(userInput)
         previousCommandCounter = Screen.previousCommands.length
-        console.log(Screen.previousCommands)
         userInputField.value = ''
         return Screen.addUserText(userInput)
       }

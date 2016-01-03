@@ -6,10 +6,6 @@ let AdventureGameObject = AdventureGameObject || {}
   let AdventurePlayerObject = Player
 
   Game.addToPlayerInventory = function (itemName) {
-    console.log('before')
-    console.log(Player.inventory)
     Player.inventory.push(itemName)
-    console.log('after')
-    console.log(Player.inventory)
   } 
 })

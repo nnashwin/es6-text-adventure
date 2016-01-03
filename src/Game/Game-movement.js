@@ -17,14 +17,13 @@ let AdventureGameObject = AdventureGameObject || {}
   }
 
   Game.takePath = function (locationKey) {
-    console.log(locationMatrix)
     if (locationKey === Game.currentLocation.currentRoomKey) {
-      console.log('you are currently in this location')
+      return 'you are currently in this location'
     }
     if (Game.currentLocation.directions.indexOf(locationKey) !== -1) {
       return Game.moveLocation(locationMatrix[locationKey])
     } else {
-      return console.log('that is not a path to go to.')
+      return 'that is not a path to go to.'
     }
   }
 

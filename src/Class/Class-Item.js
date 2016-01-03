@@ -5,11 +5,12 @@ let AdventureGameObject = AdventureGameObject || {}
     constructor (name, desc, actionsThatCanBeUsed) {
       this.name = name
       this.desc = desc
-      let actions = actionsThatCanBeUsed
+      this.actions = actionsThatCanBeUsed
       let actionObject = {}
-      for (let action of actions) {
-        if (this.actions.indexOf(action)) {
-          actionObject[action + 'able']
+
+      for (let action of this.actions) {
+        if (this.actions.indexOf(action) !== -1) {
+            actionObject[action + 'able']
         }
       }
     }

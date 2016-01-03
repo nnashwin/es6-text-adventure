@@ -17,8 +17,11 @@ let AdventureGameObject = AdventureGameObject || {}
     'look': 'examine',
     'examine': 'examine',
     'inspect': 'examine',
-    'watch': 'examine'
-  }
+    'watch': 'examine',
+    'use': 'activate',
+    'activate': 'activate',
+    'turn on': 'activate'
 
+  }
   Game.commands = commands
 })()
