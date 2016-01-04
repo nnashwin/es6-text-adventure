@@ -7,7 +7,6 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
   let Player = AdventurePlayerObject
   // start the game to ascertain the current location
   Game.startGame()
-    console.log(Game.currentLocation)
   function findCommand (inputArray) {
     for (var i = 0, n = inputArray.length; i < n; i++) {
       let index = inputArray[i]
@@ -40,7 +39,10 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
         }
       }
 
-        if (Game.commands[index] && )
+      if (Game.commands[index] && Game.commands[index] === 'examine') {
+          console.log('examining')
+          return examineObject(inputArray, i)
+      }
     }
     return 'that command is not recognized'
   }
@@ -58,6 +60,33 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
     error = 'item was not found'
     return error
   }
+
+  function determineObjectType (obj) {
+      switch (obj.type) {
+      case 'furniture': 
+          console.log('furniture')
+          break;
+      case 'item':
+          console.log('item')
+      } 
+  }
+
+
+  function examineObject (inputArray, i) {
+      let error
+      for (let j = i + 1, n = inputArray.length; j < n; j++) {
+          let objIndex = inputArray[j]
+          if (arrayObjectIndexOf(Game.currentLocation.items, objIndex, 'name') !== -1) {
+              let index = arrayObjectIndexOf(Game.currentLocation.items, objIndex, 'name')
+              let objDesc = Game.currentLocation.items[index].desc
+              return objDesc
+          }
+      }
+  }
+
+    function examineFurniture (inputArray, i) {
+        
+    }
 
   function findBaseAction (index, result) {
     if (index === 'current') {

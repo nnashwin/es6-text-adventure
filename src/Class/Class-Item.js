@@ -6,6 +6,7 @@ let AdventureGameObject = AdventureGameObject || {}
       this.name = name
       this.desc = desc
       this.actions = actionsThatCanBeUsed
+      this.type = 'item'
       let actionObject = {}
 
       for (let action of this.actions) {

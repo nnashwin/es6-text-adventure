@@ -6,6 +6,7 @@ let AdventureGameObject = AdventureGameObject || {}
       this.name = name
       this.desc = desc
       this.commands = commands
+      this.type = 'furniture'
     }
   }
   Game.Furniture = Furniture
