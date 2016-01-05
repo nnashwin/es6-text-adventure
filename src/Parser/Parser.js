@@ -61,31 +61,37 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
     return error
   }
 
-  function determineObjectType (obj) {
-      switch (obj.type) {
-      case 'furniture': 
-          console.log('furniture')
-          break;
-      case 'item':
-          console.log('item')
-      } 
+  function determineObjectType (objName) {
+      if (arrayObjectIndexOf(Game.currentLocation.items, objName, 'name') !== -1) {
+          return 'item'
+      }
+
+      if (arrayObjectIndexOf(Game.currentLocation.furniture, objName, 'name') !== -1) {
+          return 'furniture'
+      }
+      return false
   }
 
 
   function examineObject (inputArray, i) {
       let error
       for (let j = i + 1, n = inputArray.length; j < n; j++) {
-          let objIndex = inputArray[j]
-          if (arrayObjectIndexOf(Game.currentLocation.items, objIndex, 'name') !== -1) {
-              let index = arrayObjectIndexOf(Game.currentLocation.items, objIndex, 'name')
-              let objDesc = Game.currentLocation.items[index].desc
-              return objDesc
+          let obj = inputArray[j]
+          let isItem = determineObjectType(obj) === 'item' && arrayObjectIndexOf(Game.currentLocation.items, obj, 'name') !== -1
+          let isFurniture = determineObjectType(obj) === 'furniture' && arrayObjectIndexOf(Game.currentLocation.furniture, obj, 'name') !== -1
+          if (isItem) {
+              let index = arrayObjectIndexOf(Game.currentLocation.items, obj, 'name')
+              let itemDesc = Game.currentLocation.items[index].desc
+              return itemDesc
+          }
+
+          if (isFurniture) {
+              let index = arrayObjectIndexOf(Game.currentLocation.furniture, obj, 'name')
+              let furnitureDesc = Game.currentLocation.furniture[index].desc
+              return furnitureDesc
           }
       }
-  }
-
-  function examineFurniture (inputArray, i) {
-
+      return `that object does not exist`
   }
 
   function findBaseAction (index, result) {

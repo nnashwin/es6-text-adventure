@@ -14,7 +14,7 @@ var AdventureGameObject = AdventureGameObject || {}
       table: 'on the tabletop lies insulation and rocks from the ceiling.  as you look at the table a note can be seen sticking out from underneath a pile of rocks.',
       note: 'the City needs you Now...',
       furniture: [
-        new Game.Furniture('table', 'desc', ['examine'])
+        new Game.Furniture('table', 'table desc', ['examine'])
       ],
       items: [
           new Game.Item('note', 'note description', ['location', 'examine'], {'examine': ''}),
