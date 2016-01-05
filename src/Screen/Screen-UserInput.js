@@ -52,10 +52,11 @@ let AdventureScreenObject = AdventureScreenObject || {}
     let consoleDiv = document.createElement('div')
     let consoleText = document.createTextNode(message)
     let newBreak = document.createElement('br')
+    let textDiv = document.getElementById('text')
     consoleDiv.classList.add('pb-5')
-    document.getElementById('text').appendChild(consoleDiv)
-    document.getElementById('text').appendChild(newBreak)
-    consoleDiv.appendChild(consoleText)
+    textDiv.appendChild(consoleDiv)
+    textDiv.appendChild(newBreak)
+    return consoleDiv.appendChild(consoleText)
   }
 
   Screen.addAreaText = function (locationName) {
@@ -64,11 +65,12 @@ let AdventureScreenObject = AdventureScreenObject || {}
     let newDescDiv = document.createElement('div')
     let newDescText = document.createTextNode(locationName.desc)
     let newBreak = document.createElement('br')
+    let textDiv = document.getElementById('text')
     newTitleDiv.classList.add('ta-c', 'pb-5')
-    document.getElementById('text').appendChild(newTitleDiv)
-    document.getElementById('text').appendChild(newBreak)
-    document.getElementById('text').appendChild(newDescDiv)
-    document.getElementById('text').appendChild(newBreak)
+    textDiv.appendChild(newTitleDiv)
+    textDiv.appendChild(newBreak)
+    textDiv.appendChild(newDescDiv)
+    textDiv.appendChild(newBreak)
     newTitleDiv.appendChild(newTitleText)
     newDescDiv.appendChild(newDescText)
   }

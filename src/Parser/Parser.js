@@ -32,8 +32,8 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
 
       if (Game.commands[index] && Game.commands[index] === 'obtain') {
         result = findItem(inputArray, i)
-        if (result.item) {
-          return Player.addItem(result.item)
+        if (result.itemIndex) {
+          return Player.addItem(result.itemIndex)
         } else {
           return result
         }
@@ -53,7 +53,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       let itemIndex = inputArray[j]
       if (arrayObjectIndexOf(Game.currentLocation.items, itemIndex, 'name') !== -1) {
         return {
-          item: itemIndex
+          itemIndex: itemIndex
         }
       }
     }
@@ -84,9 +84,9 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       }
   }
 
-    function examineFurniture (inputArray, i) {
-        
-    }
+  function examineFurniture (inputArray, i) {
+
+  }
 
   function findBaseAction (index, result) {
     if (index === 'current') {
