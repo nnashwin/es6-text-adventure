@@ -56,6 +56,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
     consoleDiv.classList.add('pb-5')
     textDiv.appendChild(consoleDiv)
     textDiv.appendChild(newBreak)
+    console.log(consoleText)
     return consoleDiv.appendChild(consoleText)
   }
 

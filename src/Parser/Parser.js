@@ -31,34 +31,40 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       }
 
       if (Game.commands[index] && Game.commands[index] === 'obtain') {
-        result = findItem(inputArray, i)
-        if (result.itemIndex) {
-          return Player.addItem(result.itemIndex)
-        } else {
-          return result
+        for (let j = i + 1, n = inputArray.length; j < n; j++) {
+          let itemQuery = inputArray[j]
+          let testIfAlreadyInInventory = Game.findObjectIndexInArray(Player.inventory, itemQuery, 'name')
+
+          if (testIfAlreadyInInventory !== -1) {
+              return `You already have the ${itemQuery} in your inventory`
+          }
+          result = findItem(itemQuery)
+            if (result.itemIndex) {
+                return Player.addItem(result.item, result.itemIndex)
+            }
         }
+        return result
       }
 
       if (Game.commands[index] && Game.commands[index] === 'examine') {
           console.log('examining')
           return examineObject(inputArray, i)
       }
+
+      
     }
     return 'that command is not recognized'
   }
 
-  function findItem (inputArray, i) {
-    let error
-    for (let j = i + 1, n = inputArray.length; j < n; j++) {
-      let itemIndex = inputArray[j]
-      if (arrayObjectIndexOf(Game.currentLocation.items, itemIndex, 'name') !== -1) {
+  function findItem (itemQuery) {
+      let itemIndex = Game.findObjectIndexInArray(Game.currentLocation.items, itemQuery, 'name')
+      console.log(itemIndex)
+      if (itemIndex !== -1) {
         return {
-          itemIndex: itemIndex
-        }
+            itemIndex: itemIndex,
+            item: Game.currentLocation.items[itemIndex]
       }
     }
-    error = 'item was not found'
-    return error
   }
 
   function determineObjectType (objName) {
@@ -91,7 +97,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
               return furnitureDesc
           }
       }
-      return `that object does not exist`
+      return `object was not found`
   }
 
   function findBaseAction (index, result) {
@@ -120,4 +126,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       Screen.displayConsoleMessage(result)
     }
   }
+
+    // map utility function to Game
+    Game.findObjectIndexInArray = arrayObjectIndexOf
 })()

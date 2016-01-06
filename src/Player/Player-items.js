@@ -1,8 +1,10 @@
 let AdventurePlayerObject = AdventurePlayerObject || {}
 let AdventureScreenObject = AdventureScreenObject || {}
+let AdventureGameObject = AdventureGameObject || {}
 ;(function (undefined) {
   let Player = AdventurePlayerObject
   let Screen = AdventureScreenObject
+  let Game = AdventureGameObject
   Player.inventory = []
   Player.itemsEquipped = []
   Player.listInventory = function () {
@@ -15,15 +17,17 @@ let AdventureScreenObject = AdventureScreenObject || {}
     })
   }
 
-  Player.addItem = function (itemName, itemIndex) {
-    if (Player.inventory.indexOf(itemName) !== -1) {
-      return `You already have ${itemName} in your inventory`
+  Player.addItem = function (item, itemIndex) {
+    let testIfAlreadyInInventory = Game.findObjectIndexInArray(Player.inventory, item.name, 'name')
+
+    if (testIfAlreadyInInventory !== -1) {
+      return `You already have ${item.name} in your inventory`
     }
-    Player.inventory.push(itemName)
+    Player.inventory.push(item)
     // remove the item from the currentLocation
     Game.currentLocation.items.splice(itemIndex, 1)
-    console.log(Game.currentLocation.items[itemName])
-    return `${itemName} has been added to your inventory.`
+    console.log(Game.currentLocation.items)
+    return `${item.name} has been added to your inventory.`
   }
 
 
