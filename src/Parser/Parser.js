@@ -19,7 +19,7 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       if (Game.commands[index] && Game.commands[index] === 'changeLocation') {
         for (let j = i + 1, n = inputArray.length; j < n; j++) {
           let locationName = inputArray[j]
-          if (locationName === 'city') {
+          if (locationName === 'city' || locationName === 'capsule') {
             locationName = inputArray[j] + ' ' + inputArray[j + 1]
           }
           if (Game.currentLocation.directions.indexOf(locationName) !== -1) {
@@ -34,45 +34,55 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
         for (let j = i + 1, n = inputArray.length; j < n; j++) {
           let itemQuery = inputArray[j]
           let testIfAlreadyInInventory = Game.findObjectIndexInArray(Player.inventory, itemQuery, 'name')
-
+          let objType = determineObjectType(itemQuery)
           if (testIfAlreadyInInventory !== -1) {
               return `You already have the ${itemQuery} in your inventory`
           }
+
+          if (objType === 'furniture') {
+              return `${itemQuery} can not be placed in inventory`
+          }
+
           result = findItem(itemQuery)
-            if (result.itemIndex) {
-                return Player.addItem(result.item, result.itemIndex)
-            }
+          if (result.itemIndex !== -1 && objType === 'item') {
+              return Player.addItem(result.item, result.itemIndex)
+          }
         }
-        return result
+        return 'that item does not exist'
       }
 
       if (Game.commands[index] && Game.commands[index] === 'examine') {
-          console.log('examining')
           return examineObject(inputArray, i)
       }
-
-      
     }
     return 'that command is not recognized'
   }
 
   function findItem (itemQuery) {
-      let itemIndex = Game.findObjectIndexInArray(Game.currentLocation.items, itemQuery, 'name')
-      console.log(itemIndex)
-      if (itemIndex !== -1) {
-        return {
-            itemIndex: itemIndex,
-            item: Game.currentLocation.items[itemIndex]
+    let itemIndex = Game.findObjectIndexInArray(Game.currentLocation.items, itemQuery, 'name')
+    console.log(itemIndex)
+    if (itemIndex !== -1) {
+      return {
+          itemIndex: itemIndex,
+          item: Game.currentLocation.items[itemIndex]
       }
+    } else {
+      return false
     }
   }
 
   function determineObjectType (objName) {
-      if (arrayObjectIndexOf(Game.currentLocation.items, objName, 'name') !== -1) {
+      console.log(Player.inventory)
+      if (Game.findObjectIndexInArray(Player.inventory, objName, 'name') !== -1) {
+          return 'itemInInventory'
+      }
+
+
+      if (Game.findObjectIndexInArray(Game.currentLocation.items, objName, 'name') !== -1) {
           return 'item'
       }
 
-      if (arrayObjectIndexOf(Game.currentLocation.furniture, objName, 'name') !== -1) {
+      if (Game.findObjectIndexInArray(Game.currentLocation.furniture, objName, 'name') !== -1) {
           return 'furniture'
       }
       return false
@@ -83,18 +93,25 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       let error
       for (let j = i + 1, n = inputArray.length; j < n; j++) {
           let obj = inputArray[j]
-          let isItem = determineObjectType(obj) === 'item' && arrayObjectIndexOf(Game.currentLocation.items, obj, 'name') !== -1
-          let isFurniture = determineObjectType(obj) === 'furniture' && arrayObjectIndexOf(Game.currentLocation.furniture, obj, 'name') !== -1
+          let isItem = determineObjectType(obj) === 'item'
+          let isItemInInventory = determineObjectType(obj) === 'itemInInventory'
+          let isFurniture = determineObjectType(obj) === 'furniture'
           if (isItem) {
-              let index = arrayObjectIndexOf(Game.currentLocation.items, obj, 'name')
-              let itemDesc = Game.currentLocation.items[index].desc
+              let index = Game.findObjectIndexInArray(Game.currentLocation.items, obj, 'name')
+              let itemDesc = Game.currentLocation.items[index].actionResponseObject['examine']
               return itemDesc
           }
 
           if (isFurniture) {
-              let index = arrayObjectIndexOf(Game.currentLocation.furniture, obj, 'name')
+              let index = Game.findObjectIndexInArray(Game.currentLocation.furniture, obj, 'name')
               let furnitureDesc = Game.currentLocation.furniture[index].desc
               return furnitureDesc
+          }
+
+          if (isItemInInventory) {
+              let index = Game.findObjectIndexInArray(Player.inventory, obj, 'name')
+              let itemDesc = Player.inventory[index].actionResponseObject['examine']
+              return itemDesc
           }
       }
       return `object was not found`
@@ -111,13 +128,6 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
     }
   }
 
-  function arrayObjectIndexOf (myArray, searchTerm, property) {
-    for (let i = 0, n = myArray.length; i < n; i++) {
-      if (myArray[i][property] === searchTerm) return i
-    }
-    return -1
-  }
-
   Game.parseText = function (playerInput) {
     let textInput = playerInput.toLowerCase()
     let inputArray = textInput.split(' ')
@@ -126,7 +136,4 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       Screen.displayConsoleMessage(result)
     }
   }
-
-    // map utility function to Game
-    Game.findObjectIndexInArray = arrayObjectIndexOf
 })()
