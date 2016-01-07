@@ -54,6 +54,33 @@ let AdventurePlayerObject = AdventurePlayerObject || {}
       if (Game.commands[index] && Game.commands[index] === 'examine') {
           return examineObject(inputArray, i)
       }
+
+      if (Game.commands[index] && Game.commands[index] === 'equip') {
+          for (let j = i + 1, n = inputArray.length; j < n; j++) {
+              let itemQuery = inputArray[j]
+              let itemIndex = Game.findObjectIndexInArray(Player.inventory, itemQuery, 'name')
+              let item = Player.inventory[itemIndex]
+              let itemIsInInventory = (itemIndex !== -1)
+              let itemIsEquippable = item.actionResponseObject['equip'] !== 'undefined'
+              if(itemIsInInventory ) {
+                  if (typeof item.actionResponseObject['equip'] !== 'undefined') {
+                      return Player.equipItem(item)
+                  }
+                  return `${item.name} can not be equipped`
+              }
+          }
+      }
+
+      if (Game.commands[index] && Game.commands[index] === 'unequip') {
+        for (let j = i + 1, n = inputArray.length; j < n; j++) {
+            let itemQuery = inputArray[j]
+            let itemIndex = Game.findObjectIndexInArray(Player.inventory, itemQuery, 'name')
+            if(itemIndex !== -1) {
+                return Player.unequipItem(itemIndex)
+            }
+        }
+        return 'that item is not equipped'
+      }
     }
     return 'that command is not recognized'
   }

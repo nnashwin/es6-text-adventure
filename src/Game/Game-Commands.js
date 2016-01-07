@@ -11,9 +11,12 @@ let AdventureGameObject = AdventureGameObject || {}
     'pick': 'obtain',
     'choose': 'action',
     'select': 'action',
+    'equip': 'equip',
     'wear': 'equip',
     'don': 'equip',
     'put on': 'equip',
+    'remove': 'unequip',
+    'unequip': 'unequip',
     'look': 'examine',
     'examine': 'examine',
     'inspect': 'examine',
@@ -21,7 +24,6 @@ let AdventureGameObject = AdventureGameObject || {}
     'use': 'activate',
     'activate': 'activate',
     'turn on': 'activate'
-
   }
   Game.commands = commands
 })()

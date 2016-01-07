@@ -31,10 +31,16 @@ let AdventureGameObject = AdventureGameObject || {}
   }
 
 
-  Player.equipItem = function (itemName) {
-    if (Player.inventory.indexOf(itemName) !== -1) {
-      return console.log('has item')
-    }
+  Player.equipItem = function (item) {
+      Player.itemsEquipped.push(item)
+      console.log(Player.itemsEquipped)
+      return `${item.name} was equipped`
+  }
+
+  Player.unequipItem = function (itemIndex) {
+      let item = Player.itemsEquipped.splice(itemIndex, 1)
+      console.log(item[0].name)
+      return `${item[0].name} was unequipped`
   }
 
   Player.useItem = function (itemName) {
