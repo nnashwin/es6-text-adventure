@@ -5,7 +5,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
   let Screen = AdventureScreenObject
   Screen.previousCommands = []
   let previousCommandCounter = Screen.previousCommands.length
-  Screen.userTextToScreen = function () {
+  Screen.handleUserInput = function () {
     let userInputField = document.getElementById('text-input')
     userInputField.onkeydown = function (e) {
       let userInput
@@ -46,6 +46,7 @@ let AdventureScreenObject = AdventureScreenObject || {}
     Game.parseText(userInput)
     userInputDiv.appendChild(newUserText)
     textHolder.scrollTop = text.clientHeight
+    return userInput
   }
 
   Screen.displayConsoleMessage = function (message) {

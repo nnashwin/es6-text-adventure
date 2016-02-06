@@ -5,7 +5,12 @@ var AdventureGameObject = AdventureGameObject || {}
   var rooms = [
     {
       name: 'introduction',
-      desc: '',
+        desc: `In a time ahead of now, you scavenge the wastelands for scraps of what was.
+        The world was once flourishing, but it has now fallen into ruin.  What once was strong and powerful, there is nothing.
+            You are from a village which scours the land for tech and treasure.  All of the children start their scavenging at a young age,
+        and you are no different.
+            You are out on what must have been your hundredth journey into the desert.  And you have dared to venture out farther than any of your peers.  You see a laboratory in the distance.
+        `,
       directions: ['laboratory']
     },
     {
